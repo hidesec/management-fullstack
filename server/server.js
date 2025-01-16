@@ -1,9 +1,15 @@
 'use strict';
 
+var path = require('path');
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+require('dotenv').config();
 
 var app = module.exports = loopback();
+
+// Middleware untuk menyajikan file statis
+var publicPath = path.resolve(__dirname, '../public');
+app.use(loopback.static(publicPath));
 
 app.start = function() {
   // start the web server

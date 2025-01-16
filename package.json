@@ -1,5 +1,5 @@
 {
-  "name": "management-backend",
+  "name": "management-fullstack",
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
@@ -8,11 +8,15 @@
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check"
+    "posttest": "npm run lint && nsp check",
+    "build:frontend": "cd client && ember build --environment=production",
+    "build:all": "npm run build:frontend && cp -R client/dist/* public",
+    "dev": "npm run build:all && npm start"
   },
   "dependencies": {
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "dotenv": "^16.4.7",
     "helmet": "^3.11.0",
     "loopback": "^3.22.0",
     "loopback-boot": "^2.6.5",

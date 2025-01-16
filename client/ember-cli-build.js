@@ -1,6 +1,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+require('dotenv').config();
 
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
@@ -20,5 +21,7 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
+  // Proxy ke backend
+  app.options['proxy'] = process.env.PROXY_URL;
   return app.toTree();
 };
