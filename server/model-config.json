@@ -38,5 +38,9 @@
   "teams": {
     "dataSource": "db",
     "public": true
+  },
+  "members": {
+    "dataSource": "db",
+    "public": true
   }
 }
