@@ -1,5 +1,5 @@
 {
-  "name": "teams",
+  "name": "members",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -10,15 +10,19 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "string"
+    "role": {
+      "type": "string",
+      "required": true
+    },
+    "teamId": {
+      "type": "number"
     }
   },
   "validations": [],
   "relations": {
-    "members": {
-      "type": "hasMany",
-      "model": "members",
+    "teams": {
+      "type": "belongsTo",
+      "model": "teams",
       "foreignKey": "teamId"
     }
   },
