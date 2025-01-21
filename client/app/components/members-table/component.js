@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 
-export default class TeamTableComponent extends Component {
+export default class MembersTableComponent extends Component {
   @action
   initializeTable(element) {
     $(element).DataTable({
@@ -18,9 +18,5 @@ export default class TeamTableComponent extends Component {
         },
       },
     });
-  }
-
-  get teams() {
-    return this.args.data || [];
   }
 }

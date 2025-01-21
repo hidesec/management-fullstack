@@ -21,6 +21,7 @@ module.exports = function (environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    PROXY_URL: process.env.PROXY_URL,
   };
 
   if (environment === 'development') {
