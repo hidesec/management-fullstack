@@ -1,26 +1,27 @@
+<div class="d-flex justify-content-end mb-3">
+  <a href="/create-team" type="button" class="btn btn-primary">Create</a>
+</div>
 <div class="table-responsive">
   <table id="teamsTable" class="table table-striped table-hover" {{did-insert this.initializeTable}} {{will-destroy this.cleanupTable}}>
     <thead>
     <tr>
-      <th>Sl. No</th>
-      <th>Loan Money</th>
-      <th>Left to Repay</th>
-      <th>Duration</th>
-      <th>Interest Rate</th>
-      <th>Installment</th>
-      <th>Repay</th>
+      <th>No</th>
+      <th>Team Name</th>
+      <th>Description</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
     {{#each this.args.data as |item index|}}
       <tr>
-        <td>{{index}}</td>
-        <td>{{item.loanMoney}}</td>
-        <td>{{item.leftToRepay}}</td>
-        <td>{{item.duration}}</td>
-        <td>{{item.interestRate}}</td>
-        <td>{{item.installment}}</td>
-        <td><button class="btn btn-primary btn-sm"><i class="bi bi-wallet2"></i> Repay</button></td>
+        <td>{{inc index}}</td>
+        <td>{{item.teamName}}</td>
+        <td>{{item.description}}</td>
+        <td>
+          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
+          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
+          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-trash"></i> delete</a>
+        </td>
       </tr>
     {{/each}}
     </tbody>
