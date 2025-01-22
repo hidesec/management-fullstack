@@ -1,3 +1,11 @@
+<div>
+  {{#if this.teamService.alertMessage}}
+    <div class="alert {{if (eq this.teamService.alertMessageCode 200) "alert-success" "alert-danger"}} alert-dismissible fade show" role="alert">
+      {{this.teamService.alertMessage}}
+      <button type="button" class="btn-close" aria-label="Close" {{on "click" this.clearAlert}}></button>
+    </div>
+  {{/if}}
+</div>
 <div class="d-flex justify-content-end mb-3">
   <a href="/create-team" type="button" class="btn btn-primary">Create</a>
 </div>
@@ -18,9 +26,9 @@
         <td>{{item.name}}</td>
         <td>{{item.description}}</td>
         <td>
-          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
-          <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
-          <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> delete</a>
+          <a href="/view-team/{{item.id}}?view=readonly" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
+          <a href="/view-team/{{item.id}}?edit=true" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
+          <a class="btn btn-danger btn-sm" {{on "click" (fn this.deleteTeam item.id)}}><i class="bi bi-trash"></i> delete</a>
         </td>
       </tr>
     {{/each}}
