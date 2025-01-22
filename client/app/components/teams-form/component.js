@@ -7,7 +7,7 @@ export default class TeamsFormComponent extends Component {
   @service router;
 
   @action
-  async submitForm(event) {
+  async submitTeamForm(event) {
     event.preventDefault();
     const form = event.target;
     const team = {
@@ -19,7 +19,25 @@ export default class TeamsFormComponent extends Component {
     this.router.transitionTo('/');
   }
 
+  @action
+  async updateTeamForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const team = {
+      id: this.args.team.id,
+      name: event.target.team_name.value,
+      description: event.target.description.value,
+    };
+    await this.teamService.updateTeam(team);
+    form.reset();
+    this.router.transitionTo('/');
+  }
+
   get isNotReadOnly() {
     return !this.args?.team?.isReadOnly ?? false;
+  }
+
+  get isEdit() {
+    return this.args?.team?.isEdit ?? false;
   }
 }

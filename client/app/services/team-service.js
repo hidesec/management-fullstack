@@ -18,11 +18,12 @@ export default class TeamService extends Service {
     }
   }
 
-  async fetchTeamById(teamId, isReadOnly) {
+  async fetchTeamById(teamId, isReadOnly, isEdit) {
     try {
       const response = await fetch(`${config.PROXY_URL}/api/teams/${teamId}`);
       const data = await response.json();
       data.isReadOnly = isReadOnly;
+      data.isEdit = isEdit;
       this.team = data;
     } catch (error) {
       console.error('Error fetching team by ID:', error);
@@ -48,6 +49,25 @@ export default class TeamService extends Service {
       this.alertMessage = `Team "${data.name}" has been successfully added!`;
     } catch (error) {
       console.error('Error adding team:', error);
+    }
+  }
+
+  async updateTeam(team) {
+    try {
+      const response = await fetch(`${config.PROXY_URL}/api/teams/${team.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(team),
+      });
+      const data = await response.json();
+      this.team = data;
+      this.alertMessage = `Team "${data.name}" has been successfully updated!`;
+      this.alertMessageCode = 200;
+    } catch (error) {
+      console.error('Error updating team:', error);
     }
   }
 

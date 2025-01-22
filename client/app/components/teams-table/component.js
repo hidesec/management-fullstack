@@ -40,12 +40,12 @@ export default class TeamTableComponent extends Component {
   @action
   refreshTable() {
     let table = $('#teamsTable').DataTable();
-    let formattedData = this.teamService.teams.map((team) => [
-      team.id,
+    let formattedData = this.teamService.teams.map((team, index) => [
+      index + 1,
       team.name,
       team.description,
       `<a href="/view-team/${team.id}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>` +
-        `<a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>` +
+        `<a href="/view-team/${team.id}?edit=true" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>` +
         `<a class="btn btn-danger btn-sm" data-team-id="${team.id}"><i class="bi bi-trash"></i> delete</a>`,
     ]);
     table.clear().rows.add(formattedData).draw();
