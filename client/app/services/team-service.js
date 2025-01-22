@@ -4,6 +4,7 @@ import config from 'management-frontend/config/environment';
 
 export default class TeamService extends Service {
   @tracked teams = [];
+  @tracked team = null;
   @tracked alertMessage = null;
   @tracked alertMessageCode = null;
 
@@ -14,6 +15,17 @@ export default class TeamService extends Service {
       this.teams = data;
     } catch (error) {
       console.error('Error fetching teams:', error);
+    }
+  }
+
+  async fetchTeamById(teamId, isReadOnly) {
+    try {
+      const response = await fetch(`${config.PROXY_URL}/api/teams/${teamId}`);
+      const data = await response.json();
+      data.isReadOnly = isReadOnly;
+      this.team = data;
+    } catch (error) {
+      console.error('Error fetching team by ID:', error);
     }
   }
 

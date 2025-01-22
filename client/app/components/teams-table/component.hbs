@@ -26,7 +26,7 @@
         <td>{{item.name}}</td>
         <td>{{item.description}}</td>
         <td>
-          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
+          <a href="/view-team/{{item.id}}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
           <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
           <a class="btn btn-danger btn-sm" {{on "click" (fn this.deleteTeam item.id)}}><i class="bi bi-trash"></i> delete</a>
         </td>

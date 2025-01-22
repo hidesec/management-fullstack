@@ -28,6 +28,8 @@ export default class TopBarComponent extends Component {
       this.pageTitle = 'Members';
     } else if (route && route.name === 'create-member') {
       this.pageTitle = 'Create Member';
+    } else if (route && route.name === 'view-team') {
+      this.pageTitle = 'View Team';
     } else {
       this.pageTitle = 'Teams';
     }

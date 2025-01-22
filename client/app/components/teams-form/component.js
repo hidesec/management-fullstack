@@ -18,4 +18,8 @@ export default class TeamsFormComponent extends Component {
     form.reset();
     this.router.transitionTo('/');
   }
+
+  get isNotReadOnly() {
+    return !this.args?.team?.isReadOnly ?? false;
+  }
 }
