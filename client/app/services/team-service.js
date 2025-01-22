@@ -5,6 +5,7 @@ import config from 'management-frontend/config/environment';
 export default class TeamService extends Service {
   @tracked teams = [];
   @tracked alertMessage = null;
+  @tracked alertMessageCode = null;
 
   async fetchTeams() {
     try {
@@ -26,7 +27,7 @@ export default class TeamService extends Service {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
         body: JSON.stringify(team),
       });
@@ -35,6 +36,30 @@ export default class TeamService extends Service {
       this.alertMessage = `Team "${data.name}" has been successfully added!`;
     } catch (error) {
       console.error('Error adding team:', error);
+    }
+  }
+
+  async deleteTeam(teamId) {
+    try {
+      const deleteUser = await fetch(
+        `${config.PROXY_URL}/api/teams/${teamId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+          },
+        }
+      );
+      this.teams = this.teams.filter((team) => team.id !== teamId);
+      if (deleteUser.status === 200) {
+        this.alertMessageCode = 200;
+        this.alertMessage = `Team has been successfully deleted!`;
+      } else {
+        this.alertMessageCode = 500;
+        this.alertMessage = `Team has been not successfully deleted! Please check members relation!`;
+      }
+    } catch (error) {
+      console.error('Error deleting team:', error);
     }
   }
 }
