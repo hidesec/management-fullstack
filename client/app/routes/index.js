@@ -2,10 +2,10 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
 export default class IndexRoute extends Route {
-  @service teamTableService;
+  @service teamService;
 
   async model() {
-    await this.teamTableService.fetchTeams();
-    return this.teamTableService.teams;
+    await this.teamService.fetchTeams();
+    return this.teamService.teams;
   }
 }

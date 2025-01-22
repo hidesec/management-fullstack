@@ -1,3 +1,11 @@
+<div>
+  {{#if this.teamService.alertMessage}}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{this.teamService.alertMessage}}
+      <button type="button" class="btn-close" aria-label="Close" {{on "click" this.clearAlert}}></button>
+    </div>
+  {{/if}}
+</div>
 <div class="d-flex justify-content-end mb-3">
   <a href="/create-team" type="button" class="btn btn-primary">Create</a>
 </div>

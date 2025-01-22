@@ -21,7 +21,7 @@ module.exports = function (defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  // Proxy ke backend
+  // Proxy to backend
   app.options['proxy'] = process.env.PROXY_URL;
   return app.toTree();
 };

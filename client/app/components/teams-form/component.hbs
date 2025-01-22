@@ -1,12 +1,12 @@
 <!-- Form Section -->
-<form>
+<form {{on "submit" this.submitForm}}>
   <div class="form-group">
     <label for="team-name">Team Name</label>
-    <input type="text" id="team-name" class="form-control" placeholder="Team Name">
+    <input type="text" id="team-name" name="team_name" class="form-control" placeholder="Team Name">
   </div>
   <div class="form-group mt-2">
     <label for="description">Description</label>
-    <textarea class="form-control" id="description" rows="3" placeholder="Description"></textarea>
+    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description"></textarea>
   </div>
   <div class="d-flex justify-content-end mt-3">
     <a href="/" type="button" class="btn btn-warning m-2">Cancel</a>
