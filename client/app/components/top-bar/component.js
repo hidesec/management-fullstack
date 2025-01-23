@@ -34,6 +34,12 @@ export default class TopBarComponent extends Component {
       } else {
         this.pageTitle = 'Edit Team';
       }
+    } else if (route && route.name === 'view-member') {
+      if (route?.attributes?.isReadOnly) {
+        this.pageTitle = 'View Member';
+      } else {
+        this.pageTitle = 'Edit Member';
+      }
     } else {
       this.pageTitle = 'Teams';
     }

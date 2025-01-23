@@ -1,8 +1,16 @@
+<div>
+  {{#if this.memberService.alertMessage}}
+    <div class="alert {{if (eq this.memberService.alertMessageCode 200) "alert-success" "alert-danger"}} alert-dismissible fade show" role="alert">
+      {{this.memberService.alertMessage}}
+      <button type="button" class="btn-close" aria-label="Close" {{on "click" this.clearAlert}}></button>
+    </div>
+  {{/if}}
+</div>
 <div class="d-flex justify-content-end mb-3">
   <a href="/create-member" type="button" class="btn btn-primary">Create</a>
 </div>
 <div class="table-responsive">
-  <table id="teamsTable" class="table table-striped table-hover" {{did-insert this.initializeTable}} {{will-destroy this.cleanupTable}}>
+  <table id="membersTable" class="table table-striped table-hover" {{did-insert this.initializeTable}} {{will-destroy this.cleanupTable}}>
     <thead>
     <tr>
       <th>No</th>
@@ -13,16 +21,16 @@
     </tr>
     </thead>
     <tbody>
-    {{#each this.args.data as |item index|}}
+    {{#each this.members as |item index|}}
       <tr>
         <td>{{inc index}}</td>
-        <td>{{item.memberName}}</td>
+        <td>{{item.name}}</td>
         <td>{{item.role}}</td>
-        <td>{{item.nameTeam}}</td>
+        <td>{{item.teams.name}}</td>
         <td>
-          <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
-          <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
-          <a href="#" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> delete</a>
+          <a href="/view-member/{{item.id}}?view=readonly" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> view</a>
+          <a href="/view-member/{{item.id}}?edit=true" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i> edit</a>
+          <a class="btn btn-danger btn-sm" {{on "click" (fn this.deleteMember item.id)}}><i class="bi bi-trash"></i> delete</a>
         </td>
       </tr>
     {{/each}}
