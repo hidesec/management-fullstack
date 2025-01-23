@@ -33,7 +33,9 @@ export default class SidebarComponent extends Component {
   @equal('currentRoute', 'index') isIndexRoute;
   @equal('currentRoute', 'create-team') isCreateTeamRoute;
   @equal('currentRoute', 'view-team') isViewTeamRoute;
-  @or('isMembersRoute', 'isCreateMemberRoute') isMembersOrCreateMemberRoute;
+  @or('isMembersRoute', 'isCreateMemberRoute', 'isViewMemberRoute')
+  isMembersOrCreateMemberRoute;
   @equal('currentRoute', 'members-table') isMembersRoute;
   @equal('currentRoute', 'create-member') isCreateMemberRoute;
+  @equal('currentRoute', 'view-member') isViewMemberRoute;
 }

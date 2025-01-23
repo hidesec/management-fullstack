@@ -1,21 +1,31 @@
 <!-- Form Section -->
-<form>
+<form {{on "submit" (if this.isEdit this.updateMemberForm this.submitMemberForm) }}>
   <div class="form-group">
     <label for="member-name">Member Name</label>
-    <input type="text" id="member-name" class="form-control" placeholder="Member Name">
+    <input type="text" id="member-name" name="member_name" class="form-control" placeholder="Member Name" value={{@member.name}} disabled={{@member.isReadOnly}}>
   </div>
   <div class="form-group mt-2">
     <label for="role">Role</label>
-    <input type="text" id="role" class="form-control" placeholder="Role">
+    <input type="text" id="role" name="role" class="form-control" placeholder="Role" value={{@member.role}} disabled={{@member.isReadOnly}}>
   </div>
   <div class="form-group mt-2">
     <label for="name-teams">Name Teams</label>
-    <select class="form-control" id="name-teams">
-      <option>Team A</option>
+    <select class="form-control" id="name-teams" name="name_teams" disabled={{@member.isReadOnly}}>
+      {{#if @member}}
+        {{#each @member.teams as |team|}}
+          <option value={{team.id}} selected={{if (eq team.id @member.teamId) "selected"}}>{{team.name}}</option>
+        {{/each}}
+      {{else}}
+        {{#each @teams as |team|}}
+          <option value={{team.id}}>{{team.name}}</option>
+        {{/each}}
+      {{/if}}
     </select>
   </div>
   <div class="d-flex justify-content-end mt-3">
-    <a href="/members" type="button" class="btn btn-warning m-2">Cancel</a>
-    <button type="submit" class="btn btn-primary m-2">Submit</button>
+    <a href="/members" type="button" class="btn {{if this.isNotReadOnly "btn-warning" "btn-primary"}} m-2">{{if this.isNotReadOnly "Cancel" "Kembali"}}</a>
+    {{#if this.isNotReadOnly}}
+      <button type="submit" class="btn btn-primary m-2">Submit</button>
+    {{/if}}
   </div>
 </form>

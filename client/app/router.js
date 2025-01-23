@@ -12,4 +12,5 @@ Router.map(function () {
   this.route('members-table', { path: '/members' });
   this.route('create-member');
   this.route('view-team', { path: '/view-team/:team_id' });
+  this.route('view-member', { path: '/view-member/:member_id' });
 });
