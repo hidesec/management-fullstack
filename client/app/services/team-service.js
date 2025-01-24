@@ -15,6 +15,7 @@ export default class TeamService extends Service {
       this.teams = data;
     } catch (error) {
       console.error('Error fetching teams:', error);
+      throw error;
     }
   }
 
