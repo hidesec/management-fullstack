@@ -44,6 +44,7 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "app.tar.gz"
         target: "~/compile"
+        debug: true
 
   deploy:
     runs-on: ubuntu-latest
