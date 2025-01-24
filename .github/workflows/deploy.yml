@@ -1,0 +1,57 @@
+name: CI/CD Pipeline Management Fullstack App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build frontend
+      run: npm run build:frontend
+
+    - name: Copy frontend build to public directory
+      run: npm run build:all
+
+    - name: Archive production artifacts
+      run: tar -czf app.tar.gz ./*
+
+    - name: Deploy to VPS
+      uses: appleboy/scp-action@v0.1.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        source: "app.tar.gz"
+        target: "~/app.tar.gz"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: SSH to VPS and deploy
+      uses: appleboy/ssh-action@v0.1.0
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          tar -xzf ~/app.tar.gz -C ~/app
+          cd ~/app
+          npm install --production
+          pm2 restart all
