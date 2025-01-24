@@ -11,8 +11,27 @@ var app = module.exports = loopback();
 var publicPath = path.resolve(__dirname, '../public');
 app.use(loopback.static(publicPath));
 
+// Bootstrap the application, configure models, datasources, and middleware.
+// Sub-apps like REST API are mounted via boot scripts.
+boot(app, __dirname, function(err) {
+  if (err) throw err;
+
+  // Fallback ke index.html untuk Ember.js routes
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+      return next();
+    }
+    res.sendFile(path.join(publicPath, 'index.html'));
+  });
+
+  // Start the server if `$ node server.js`
+  if (require.main === module) {
+    app.start();
+  }
+});
+
 app.start = function() {
-  // start the web server
+  // Start the web server
   return app.listen(function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
@@ -23,13 +42,3 @@ app.start = function() {
     }
   });
 };
-
-// Bootstrap the application, configure models, datasources and middleware.
-// Sub-apps like REST API are mounted via boot scripts.
-boot(app, __dirname, function(err) {
-  if (err) throw err;
-
-  // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
-});
