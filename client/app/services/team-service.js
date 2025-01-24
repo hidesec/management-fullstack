@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import config from 'management-frontend/config/environment';
 
 export default class TeamService extends Service {
   @tracked teams = [];
@@ -10,9 +9,8 @@ export default class TeamService extends Service {
 
   async fetchTeams() {
     try {
-      const response = await fetch(config.PROXY_URL + '/api/teams');
+      const response = await fetch('/api/teams');
       const data = await response.json();
-      console.log('data', data);
       this.teams = data;
     } catch (error) {
       console.error('Error fetching teams:', error);
@@ -21,7 +19,7 @@ export default class TeamService extends Service {
 
   async fetchTeamById(teamId, isReadOnly, isEdit) {
     try {
-      const response = await fetch(`${config.PROXY_URL}/api/teams/${teamId}`);
+      const response = await fetch(`/api/teams/${teamId}`);
       const data = await response.json();
       data.isReadOnly = isReadOnly;
       data.isEdit = isEdit;
@@ -37,7 +35,7 @@ export default class TeamService extends Service {
 
   async addTeam(team) {
     try {
-      const response = await fetch(config.PROXY_URL + '/api/teams', {
+      const response = await fetch('/api/teams', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -55,7 +53,7 @@ export default class TeamService extends Service {
 
   async updateTeam(team) {
     try {
-      const response = await fetch(`${config.PROXY_URL}/api/teams/${team.id}`, {
+      const response = await fetch(`/api/teams/${team.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -74,15 +72,12 @@ export default class TeamService extends Service {
 
   async deleteTeam(teamId) {
     try {
-      const deleteUser = await fetch(
-        `${config.PROXY_URL}/api/teams/${teamId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            Accept: 'application/json',
-          },
-        }
-      );
+      const deleteUser = await fetch(`/api/teams/${teamId}`, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+        },
+      });
       this.teams = this.teams.filter((team) => team.id !== teamId);
       if (deleteUser.status === 200) {
         this.alertMessageCode = 200;
