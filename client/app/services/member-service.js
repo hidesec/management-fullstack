@@ -1,6 +1,5 @@
 import Service from '@ember/service';
 import { tracked } from '@glimmer/tracking';
-import config from 'management-frontend/config/environment';
 
 export default class MemberService extends Service {
   @tracked members = [];
@@ -10,7 +9,7 @@ export default class MemberService extends Service {
 
   async fetchMembers() {
     try {
-      const response = await fetch(config.PROXY_URL + '/api/members?filter={"include": "teams"}');
+      const response = await fetch('/api/members?filter={"include": "teams"}');
       const data = await response.json();
       this.members = data;
     } catch (error) {
@@ -21,9 +20,9 @@ export default class MemberService extends Service {
   async fetchMemberById(memberId, isReadOnly, isEdit) {
     try {
       const response = await fetch(
-        `${config.PROXY_URL}/api/members/${memberId}?filter={"include": "teams"}`
+        `/api/members/${memberId}?filter={"include": "teams"}`
       );
-      const responseTeams = await fetch(config.PROXY_URL + '/api/teams');
+      const responseTeams = await fetch('/api/teams');
       const dataTeams = await responseTeams.json();
       const data = await response.json();
       data.isReadOnly = isReadOnly;
@@ -41,7 +40,7 @@ export default class MemberService extends Service {
 
   async addMember(member) {
     try {
-      const response = await fetch(config.PROXY_URL + '/api/members', {
+      const response = await fetch('/api/members', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,17 +58,14 @@ export default class MemberService extends Service {
 
   async updateMember(member) {
     try {
-      const response = await fetch(
-        `${config.PROXY_URL}/api/members/${member.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify(member),
-        }
-      );
+      const response = await fetch(`/api/members/${member.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(member),
+      });
       const data = await response.json();
       this.members = this.members.map((m) => (m.id === data.id ? data : m));
       this.alertMessage = `Member "${data.name}" has been successfully updated!`;
@@ -80,12 +76,9 @@ export default class MemberService extends Service {
 
   async deleteMember(memberId) {
     try {
-      const response = await fetch(
-        `${config.PROXY_URL}/api/members/${memberId}`,
-        {
-          method: 'DELETE',
-        }
-      );
+      const response = await fetch(`/api/members/${memberId}`, {
+        method: 'DELETE',
+      });
       if (response.status === 204 || response.status === 200) {
         this.members = this.members.filter((member) => member.id !== memberId);
         this.alertMessage = 'Member has been successfully deleted!';
