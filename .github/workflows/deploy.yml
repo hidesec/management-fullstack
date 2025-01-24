@@ -73,7 +73,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             # Prepare directories
-            mkdir -p ~/app
+            mkdir -p ~/compile ~/app
             # Extract the archive
             tar -xzf ~/compile/app.tar.gz -C ~/app
             cd ~/app
