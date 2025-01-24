@@ -43,7 +43,7 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: "app.tar.gz"
-        target: "~/app.tar.gz"
+        target: "~/compile"
 
   deploy:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
         username: ${{ secrets.VPS_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          tar -xzf ~/app.tar.gz -C ~/app
+          tar -xzf ~/compile/app.tar.gz -C ~/app
           cd ~/app
           npm install --production
           pm2 restart all
