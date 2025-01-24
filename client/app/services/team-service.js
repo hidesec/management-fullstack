@@ -12,10 +12,10 @@ export default class TeamService extends Service {
     try {
       const response = await fetch(config.PROXY_URL + '/api/teams');
       const data = await response.json();
+      console.log('data', data);
       this.teams = data;
     } catch (error) {
       console.error('Error fetching teams:', error);
-      throw error;
     }
   }
 
