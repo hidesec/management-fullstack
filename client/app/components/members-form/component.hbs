@@ -2,11 +2,11 @@
 <form {{on "submit" (if this.isEdit this.updateMemberForm this.submitMemberForm) }}>
   <div class="form-group">
     <label for="member-name">Member Name</label>
-    <input type="text" id="member-name" name="member_name" class="form-control" placeholder="Member Name" value={{@member.name}} disabled={{@member.isReadOnly}}>
+    <input type="text" id="member-name" name="member_name" class="form-control" placeholder="Member Name" value={{@member.name}} disabled={{@member.isReadOnly}} required >
   </div>
   <div class="form-group mt-2">
     <label for="role">Role</label>
-    <input type="text" id="role" name="role" class="form-control" placeholder="Role" value={{@member.role}} disabled={{@member.isReadOnly}}>
+    <input type="text" id="role" name="role" class="form-control" placeholder="Role" value={{@member.role}} disabled={{@member.isReadOnly}} required >
   </div>
   <div class="form-group mt-2">
     <label for="name-teams">Name Teams</label>

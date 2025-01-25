@@ -1,5 +1,6 @@
-<nav class="col-md-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
-  <div class="d-md-block">
+<nav class="col-md-2 d-md-block bg-light sidebar" id="sidebarMenu">
+  <!-- Sidebar Menu for Larger Screens -->
+  <div class="d-none d-md-block">
     <ul class="nav flex-column">
       <li class="nav-item mb-2">
         <a class="nav-link {{if this.isIndexOrCreateTeamRoute 'active'}}" href="/"><i class="bi bi-people-fill me-2"></i> Teams</a>
@@ -8,5 +9,28 @@
         <a class="nav-link {{if this.isMembersOrCreateMemberRoute 'active'}}" href="/members"><i class="bi bi-person-vcard-fill me-2"></i> Members</a>
       </li>
     </ul>
+  </div>
+
+  <!-- Responsive Menu for Mobile -->
+  <div class="d-md-none">
+    <button
+      class="btn btn-primary w-100 mb-2 d-flex align-items-center"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mobileMenu"
+      aria-expanded="false"
+      aria-controls="mobileMenu">
+      <i class="bi bi-list me-2"></i>
+    </button>
+    <div class="collapse" id="mobileMenu">
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link {{if this.isIndexOrCreateTeamRoute 'active'}}" href="/"><i class="bi bi-people-fill me-2"></i> Teams</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link {{if this.isMembersOrCreateMemberRoute 'active'}}" href="/members"><i class="bi bi-person-vcard-fill me-2"></i> Members</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
