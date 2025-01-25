@@ -1,3 +1,4 @@
+/* Sidebar Styling */
 .sidebar {
   height: 100vh;
   position: fixed;
@@ -5,15 +6,22 @@
   left: 0;
   background-color: #f8f9fa;
   padding-top: 20px;
-}
-
-.table-responsive {
-  overflow-x: auto;
+  overflow-y: auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 250px; /* Sidebar width */
 }
 
 .sidebar .nav-link {
   font-size: 16px;
   color: #333;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #e9ecef;
 }
 
 .sidebar .nav-link.active {
@@ -21,11 +29,58 @@
   color: #fff;
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    position: absolute;
-    z-index: 1045;
-  }
+/* Mobile Menu Button */
+button[data-bs-toggle="collapse"] {
+  font-size: 16px;
+  text-align: left;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+button[data-bs-toggle="collapse"]:hover {
+  background-color: #0056b3;
+}
+
+button[data-bs-toggle="collapse"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mobile Menu Container */
+.collapse {
+  padding-top: 10px;
+}
+
+.collapse ul.nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.collapse ul.nav .nav-item {
+  margin-bottom: 10px;
+}
+
+.collapse ul.nav .nav-item .nav-link {
+  font-size: 16px;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.collapse ul.nav .nav-item .nav-link:hover {
+  background-color: #e9ecef;
+}
+
+/* Table and DataTables Styles */
+.table-responsive {
+  overflow-x: auto;
 }
 
 .dataTables_wrapper .dataTables_length,
@@ -56,6 +111,7 @@
 }
 
 @media (max-width: 768px) {
+  /* Adjust DataTables layout for mobile */
   .dataTables_wrapper .dataTables_length,
   .dataTables_wrapper .dataTables_info,
   .dataTables_wrapper .dataTables_paginate {
@@ -66,5 +122,38 @@
 
   .dataTables_wrapper .dataTables_paginate {
     margin-top: 0.5rem;
+  }
+
+  /* Responsive Sidebar Adjustments */
+  .sidebar {
+    width: 100%; /* Make sidebar take full width on mobile */
+    height: auto; /* Adjust sidebar height */
+    position: static; /* Change position to static for mobile */
+    padding: 0; /* Remove extra padding */
+    box-shadow: none; /* Remove box-shadow */
+  }
+
+  /* Adjust content layout on mobile */
+  .container-fluid {
+    padding-left: 0; /* Remove left padding */
+  }
+
+  .main-content {
+    margin-left: 0; /* Remove left margin */
+  }
+
+  /* Ensure proper collapse menu behavior */
+  .collapse {
+    padding-top: 10px;
+  }
+
+  .collapse ul.nav .nav-item {
+    margin-bottom: 5px;
+  }
+
+  /* Adjust sidebar nav-link padding */
+  .sidebar .nav-link {
+    font-size: 14px;
+    padding: 10px 12px;
   }
 }

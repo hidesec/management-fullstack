@@ -2,7 +2,7 @@
 <form {{on "submit" (if this.isEdit this.updateTeamForm this.submitTeamForm) }}>
   <div class="form-group">
     <label for="team-name">Team Name</label>
-    <input type="text" id="team-name" name="team_name" class="form-control" placeholder="Team Name" value={{@team.name}} disabled={{@team.isReadOnly}} >
+    <input type="text" id="team-name" name="team_name" class="form-control" placeholder="Team Name" value={{@team.name}} disabled={{@team.isReadOnly}} required >
   </div>
   <div class="form-group mt-2">
     <label for="description">Description</label>
