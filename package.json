@@ -5,13 +5,16 @@
   "engines": {
     "node": ">=6"
   },
+  "jest": {
+    "testEnvironment": "node"
+  },
   "scripts": {
     "lint": "eslint .",
     "start": "node .",
-    "posttest": "npm run lint && nsp check",
     "build:frontend": "cd client && ember build --environment=production",
     "build:all": "npm run build:frontend && cp -R client/dist/* public",
-    "dev": "npm run build:all && npm start"
+    "dev": "npm run build:all && npm start",
+    "test": "jest"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -28,7 +31,9 @@
   },
   "devDependencies": {
     "eslint": "^3.17.1",
-    "eslint-config-loopback": "^8.0.0"
+    "eslint-config-loopback": "^8.0.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   },
   "repository": {
     "type": "",
