@@ -21,6 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set up database environment variables
+        run: |
+          echo "DB_HOST=localhost" >> $GITHUB_ENV
+          echo "DB_PORT=5432" >> $GITHUB_ENV
+          echo "DB_USER=postgres" >> $GITHUB_ENV
+          echo "DB_PASSWORD=postgres" >> $GITHUB_ENV
+          echo "DB_DATABASE=management_database" >> $GITHUB_ENV
+
       - name: Run tests
         run: npm test
 
