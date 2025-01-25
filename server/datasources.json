@@ -1,11 +1,11 @@
 {
   "db": {
-    "host": "${DB_HOST || 'localhost'}",
-    "port": "${DB_PORT || 5432}",
-    "database": "${DB_DATABASE || 'management_database'}",
-    "password": "${DB_PASSWORD || 'postgres'}",
     "name": "db",
     "connector": "postgresql",
-    "user": "${DB_USER || 'postgres'}"
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
+    "database": "${DB_DATABASE}",
+    "user": "${DB_USER}",
+    "password": "${DB_PASSWORD}"
   }
 }
